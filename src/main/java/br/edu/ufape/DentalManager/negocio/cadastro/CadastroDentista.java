@@ -8,13 +8,14 @@ import br.edu.ufape.DentalManager.dado.ColecaoDentista;
 import br.edu.ufape.DentalManager.negocio.basica.Dentista;
 
 public class CadastroDentista implements InterfaceCadastroDentista{
-	
+
 	@Autowired
 	private ColecaoDentista colecaodentista;
+
 	@Override
 	public List<Dentista> procurarDentistaNome(String nome) {
 		
-		return colecaodentista.findByNomeContaining(nome);
+		 return colecaodentista.findByNomeContaining(nome);
 	}
 
 	@Override
@@ -43,8 +44,9 @@ public class CadastroDentista implements InterfaceCadastroDentista{
 
 	@Override
 	public void deletarDentista(Dentista dentista) {
-		colecaodentista.delete(dentista);
 		
+		colecaodentista.delete(dentista);
 	}
+
 
 }
