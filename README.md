@@ -1,1 +1,1 @@
-# Dental-Manager
+# DentalManager
