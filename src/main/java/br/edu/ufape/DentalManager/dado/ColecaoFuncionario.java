@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import br.edu.ufape.DentalManager.negocio.basica.Funcionario;
 
-
-
-
 @Repository
 public interface ColecaoFuncionario extends  JpaRepository<Funcionario, Long> {
 		
