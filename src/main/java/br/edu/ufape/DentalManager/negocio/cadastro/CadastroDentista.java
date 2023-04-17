@@ -16,7 +16,6 @@ public class CadastroDentista implements InterfaceCadastroDentista{
 
 	@Override
 	public List<Dentista> procurarDentistaNome(String nome) {
-		
 		 return colecaodentista.findByNomeContaining(nome);
 	}
 

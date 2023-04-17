@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.DentalManager.negocio.basica.Administrador;
 import br.edu.ufape.DentalManager.negocio.basica.Agenda;
 import br.edu.ufape.DentalManager.negocio.basica.Agendamento;
+import br.edu.ufape.DentalManager.negocio.cadastro.FuncionarioInexistenteException;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAdministrador;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAgenda;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAgendamento;
@@ -118,7 +119,7 @@ public class Dentalmanager {
 		cadastroAgendamento.deletarAgenda(agendamento);
 	}
 	
-	List<Funcionario> procurarFuncionarioNome(String nome){
+	List<Funcionario> procurarFuncionarioNome(String nome) throws FuncionarioInexistenteException{
 		return cadastroFuncionario.procurarFuncionarioNome(nome);
 	}
 
@@ -161,7 +162,12 @@ public class Dentalmanager {
 	}
 
 	void salvarSecretario(Secretario secretario) {
-		cadastroSecretario.salvarSecretario(secretario);
+		try {
+			if(cadastroFuncionario.ProcurarFuncionarioCPF(secretario.getCpf())!=null)
+				cadastroSecretario.salvarSecretario(secretario);
+		} catch (FuncionarioInexistenteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	void deletarSecretario(Secretario secretario) {
@@ -255,5 +261,22 @@ public class Dentalmanager {
 	public void deletarClinica(Clinica clinica) {
 		cadastroClinica.deletarClinica(clinica);
 	}
-
+	//dentista
+	public void CriarAgenda(Agenda agenda) {
+		cadastroAgenda.salvarAgenda(agenda);
+	}
+	//secretario
+	public void Agendar(Agendamento agendamento) {
+		cadastroAgendamento.salvarAgenda(agendamento);
+	}
+	public void ConfirmarAgendamento(Agendamento agendamento) {
+		List<Agendamento>agendamentos=cadastroAgendamento.procurarAgendamentoPaciente(agendamento.getNomePaciente());
+		for(Agendamento a : agendamentos) {
+			if(a.getData()==agendamento.getData()) {
+				cadastroAgendamento.salvarAgenda(agendamento);
+			}
+		}
+		
+	}
+	
 }

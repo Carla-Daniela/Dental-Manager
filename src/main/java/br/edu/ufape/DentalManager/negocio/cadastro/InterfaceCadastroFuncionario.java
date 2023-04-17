@@ -8,7 +8,7 @@ import br.edu.ufape.DentalManager.negocio.basica.Funcionario;
 
 public interface InterfaceCadastroFuncionario {
 	
-	List<Funcionario> procurarFuncionarioNome(String nome);
+	List<Funcionario> procurarFuncionarioNome(String nome) throws FuncionarioInexistenteException;
 
 	Funcionario procurarFuncionarioId(long id);
 
@@ -20,5 +20,6 @@ public interface InterfaceCadastroFuncionario {
 
 	void deletarFuncionario(Funcionario funcionario);
 
+	Funcionario ProcurarFuncionarioCPF(long cpf) throws FuncionarioInexistenteException;
 
 }
