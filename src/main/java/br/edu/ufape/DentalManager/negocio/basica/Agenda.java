@@ -1,11 +1,13 @@
 package br.edu.ufape.DentalManager.negocio.basica;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Agenda {
@@ -17,16 +19,21 @@ public class Agenda {
 	private String semana;
 	private String mes;
 	private String horario;
+	@OneToMany
+	private List<Agendamento> agendamentos;
 	
-	public Agenda(String dia, String semana, String mes, String horario) {
-
+	
+	public Agenda () {
+		
+	}
+	public Agenda(long id, String dia, String semana, String mes, String horario, List<Agendamento> agendamentos) {
+		super();
+		this.id = id;
 		this.dia = dia;
 		this.semana = semana;
 		this.mes = mes;
 		this.horario = horario;
-	}
-	public Agenda () {
-		
+		this.agendamentos = agendamentos;
 	}
 	public long getId() {
 		return id;
@@ -63,12 +70,16 @@ public class Agenda {
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
-
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(dia, horario, id, mes, semana);
+		return Objects.hash(agendamentos, dia, horario, id, mes, semana);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,9 +89,12 @@ public class Agenda {
 		if (getClass() != obj.getClass())
 			return false;
 		Agenda other = (Agenda) obj;
-		return Objects.equals(dia, other.dia) && Objects.equals(horario, other.horario) && id == other.id
-				&& Objects.equals(mes, other.mes) && Objects.equals(semana, other.semana);
+		return Objects.equals(agendamentos, other.agendamentos) && Objects.equals(dia, other.dia)
+				&& Objects.equals(horario, other.horario) && id == other.id && Objects.equals(mes, other.mes)
+				&& Objects.equals(semana, other.semana);
 	}
+
+	
 	
 	
 }

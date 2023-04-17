@@ -1,13 +1,16 @@
 package br.edu.ufape.DentalManager.negocio.basica;
 
 import java.util.Date;
+import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -16,8 +19,9 @@ public class Funcionario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idFunci;
-	
+	private long idFunci;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
 	private String nome;
 	private Date admissao;
 	private String cargo;
@@ -25,10 +29,12 @@ public class Funcionario {
 	
 	public Funcionario() {}
 	
-	public Funcionario( String nome, Date admissao, String cargo) {
+	public Funcionario( String nome, Date admissao, String cargo, long id, Endereco endereco) {
 		this.nome = nome;
 		this.admissao = admissao;
 		this.cargo = cargo;
+		this.idFunci=id;
+		this.endereco=endereco;
 	}
 
 	
@@ -36,7 +42,7 @@ public class Funcionario {
 		return idFunci;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.idFunci = id;
 	}
 
@@ -64,15 +70,17 @@ public class Funcionario {
 		this.cargo = cargo;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((admissao == null) ? 0 : admissao.hashCode());
-		result = prime * result + ((cargo == null) ? 0 : cargo.hashCode());
-		result = prime * result + idFunci;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		return result;
+		return Objects.hash(admissao, cargo, endereco, idFunci, nome);
 	}
 
 	@Override
@@ -84,25 +92,15 @@ public class Funcionario {
 		if (getClass() != obj.getClass())
 			return false;
 		Funcionario other = (Funcionario) obj;
-		if (admissao == null) {
-			if (other.admissao != null)
-				return false;
-		} else if (!admissao.equals(other.admissao))
-			return false;
-		if (cargo == null) {
-			if (other.cargo != null)
-				return false;
-		} else if (!cargo.equals(other.cargo))
-			return false;
-		if (idFunci != other.idFunci)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
+		return Objects.equals(admissao, other.admissao) && Objects.equals(cargo, other.cargo)
+				&& Objects.equals(endereco, other.endereco) && idFunci == other.idFunci
+				&& Objects.equals(nome, other.nome);
 	}
+	
+	
+
+	
+	
 	
 	
 	

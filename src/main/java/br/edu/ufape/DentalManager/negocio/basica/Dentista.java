@@ -1,6 +1,10 @@
 package br.edu.ufape.DentalManager.negocio.basica;
 
+import java.util.List;
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -9,17 +13,18 @@ public class Dentista extends Funcionario {
 
 	
 	private int CRO;
-	
-	
+	@OneToMany
+	private List<Agenda>agenda;
 	public Dentista(){}
 	
-	public Dentista(int CRO) {
+
+	public Dentista(int cRO, List<Agenda> agenda) {
 		super();
-		this.CRO = CRO;
+		CRO = cRO;
+		this.agenda = agenda;
 	}
 
-	
-	
+
 	public int getCRO() {
 		return CRO;
 	}
@@ -28,14 +33,21 @@ public class Dentista extends Funcionario {
 		CRO = cRO;
 	}
 	
-	public void criarAgenda() {}
-	
+
+	public List<Agenda> getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(List<Agenda> agenda) {
+		this.agenda = agenda;
+	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + CRO;
+		result = prime * result + Objects.hash(CRO, agenda);
 		return result;
 	}
 
@@ -48,10 +60,13 @@ public class Dentista extends Funcionario {
 		if (getClass() != obj.getClass())
 			return false;
 		Dentista other = (Dentista) obj;
-		if (CRO != other.CRO)
-			return false;
-		return true;
+		return CRO == other.CRO && Objects.equals(agenda, other.agenda);
 	}
+
+
+
+
+	
 	
 	
 	

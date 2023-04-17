@@ -1,12 +1,16 @@
 package br.edu.ufape.DentalManager.negocio.basica;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Paciente {
@@ -21,14 +25,17 @@ public class Paciente {
 	private String tipoSanguineo;
 	private String deficiencia;
 	private String cpf;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
+	@OneToMany
+	private List<Agendamento>agendamentos;
 	
 	public Paciente() {
 	}
 
-
-
 	public Paciente(long id, String nome, Date nascimento, boolean sexo, String alergia, String tipoSanguineo,
-			String deficiencia) {
+			String deficiencia, String cpf, Endereco endereco, List<Agendamento> agendamentos) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.nascimento = nascimento;
@@ -37,11 +44,11 @@ public class Paciente {
 		this.tipoSanguineo = tipoSanguineo;
 		this.deficiencia = deficiencia;
 		this.cpf = cpf;
+		this.endereco = endereco;
+		this.agendamentos = agendamentos;
 	}
 
 
-
-	
 	public long getId() {
 		return id;
 	}
@@ -105,15 +112,31 @@ public class Paciente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
 
-
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(alergia, cpf, deficiencia, id, nascimento, nome, sexo, tipoSanguineo);
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
 
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(agendamentos, alergia, cpf, deficiencia, endereco, id, nascimento, nome, sexo,
+				tipoSanguineo);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -124,11 +147,17 @@ public class Paciente {
 		if (getClass() != obj.getClass())
 			return false;
 		Paciente other = (Paciente) obj;
-		return Objects.equals(alergia, other.alergia) && Objects.equals(cpf, other.cpf)
-				&& Objects.equals(deficiencia, other.deficiencia) && id == other.id
+		return Objects.equals(agendamentos, other.agendamentos) && Objects.equals(alergia, other.alergia)
+				&& Objects.equals(cpf, other.cpf) && Objects.equals(deficiencia, other.deficiencia)
+				&& Objects.equals(endereco, other.endereco) && id == other.id
 				&& Objects.equals(nascimento, other.nascimento) && Objects.equals(nome, other.nome)
 				&& sexo == other.sexo && Objects.equals(tipoSanguineo, other.tipoSanguineo);
 	}
+
+	
+
+
+	
 
 	
 }
