@@ -3,11 +3,13 @@ package br.edu.ufape.DentalManager.negocio.cadastro;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.ufape.DentalManager.dado.ColecaoAgenda;
 import br.edu.ufape.DentalManager.dado.ColecaoAgendamento;
 import br.edu.ufape.DentalManager.negocio.basica.Agendamento;
 
+@Service
 public class CadastroAgendamento implements InterfaceCadastroAgendamento {
 	@Autowired
 	private ColecaoAgendamento colecaoagendamento;
@@ -23,7 +25,7 @@ public class CadastroAgendamento implements InterfaceCadastroAgendamento {
 	}
 
 	@Override
-	public List<Agendamento> listarAgenda() {
+	public List<Agendamento> listarAgendamet(){
 		return colecaoagendamento.findAll();
 	}
 
