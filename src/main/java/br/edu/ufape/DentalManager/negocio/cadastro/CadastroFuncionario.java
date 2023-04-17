@@ -3,10 +3,13 @@ package br.edu.ufape.DentalManager.negocio.cadastro;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.ufape.DentalManager.dado.ColecaoFuncionario;
 import br.edu.ufape.DentalManager.negocio.basica.Funcionario;
 
+
+@Service
 public class CadastroFuncionario implements InterfaceCadastroFuncionario{
 	
 	
