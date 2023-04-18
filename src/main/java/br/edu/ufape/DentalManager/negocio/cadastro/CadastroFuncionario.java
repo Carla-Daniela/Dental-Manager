@@ -18,10 +18,8 @@ public class CadastroFuncionario implements InterfaceCadastroFuncionario{
 	
 	
 	@Override
-	public List<Funcionario> procurarFuncionarioNome(String nome) throws FuncionarioInexistenteException {
-		if(colecaofuncionario.findByNomeContaining(nome)!=null)
-			return colecaofuncionario.findByNomeContaining(nome);
-		throw new FuncionarioInexistenteException();
+	public List<Funcionario> procurarFuncionarioNome(String nome){
+		return colecaofuncionario.findByNome(nome);
 	}
 	
 
