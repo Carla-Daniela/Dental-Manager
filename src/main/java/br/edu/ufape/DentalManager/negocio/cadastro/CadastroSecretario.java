@@ -27,13 +27,11 @@ public class CadastroSecretario implements InterfaceCadastroSecretario{
 
 	@Override
 	public List<Secretario> listarSecretario() {
-		
 		return colecaosecretario.findAll();
 	}
 
 	@Override
 	public void deletarSecretarioId(Long id) {
-		
 		colecaosecretario.deleteById(id);
 	}
 

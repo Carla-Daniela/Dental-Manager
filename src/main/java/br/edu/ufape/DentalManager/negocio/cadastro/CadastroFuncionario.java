@@ -18,21 +18,29 @@ public class CadastroFuncionario implements InterfaceCadastroFuncionario{
 	
 	
 	@Override
-	public List<Funcionario> procurarFuncionarioNome(String nome) {
-		
-		return colecaofuncionario.findByNomeContaining(nome);
+	public List<Funcionario> procurarFuncionarioNome(String nome){
+		return colecaofuncionario.findByNome(nome);
 	}
+	
 
 	@Override
 	public Funcionario procurarFuncionarioId(long id) {
-		
 		return colecaofuncionario.findById(id).orElse(null);
 	}
-
+	
 	@Override
 	public List<Funcionario> listarFuncionario() {
-		
 		return colecaofuncionario.findAll();
+	}
+	@Override
+	public Funcionario ProcurarFuncionarioCPF(long cpf) throws FuncionarioInexistenteException {
+		List<Funcionario>funcionarios=listarFuncionario();
+		for(Funcionario funcionario : funcionarios) {
+			if(funcionario.getCpf()==cpf) {
+				return funcionario;
+			}
+		}
+		throw new FuncionarioInexistenteException();
 	}
 
 	@Override
@@ -41,7 +49,6 @@ public class CadastroFuncionario implements InterfaceCadastroFuncionario{
 		
 	}
 
-	
 	@Override
 	public void deletarFuncionario(Funcionario funcionario) {
 		colecaofuncionario.delete(funcionario);
