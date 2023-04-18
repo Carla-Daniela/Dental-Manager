@@ -142,8 +142,6 @@ public class Dentalmanager {
 		cadastroFuncionario.deletarFuncionario(funcionario);
 	}
 	
-	
-	
 	List<Secretario> procurarSecretarioNome(String nome){
 		return cadastroSecretario.procurarSecretarioNome(nome);
 	}
@@ -229,10 +227,16 @@ public class Dentalmanager {
 
 	public void deletarPacienteId(Long id) {
 		cadastroPaciente.deletarPaciente(id);
+		
+		
 	}
-	public Paciente salvarPaciente(Paciente entity) {
-		return cadastroPaciente.salvarPaciente(entity);
+	public void salvarPaciente(Paciente entity) throws Exception {
+		
+			 cadastroPaciente.salvarPaciente(entity);
+
 	}
+	
+	
 	public void deletarPaciente(Paciente paciente) {
 		cadastroPaciente.deletarPaciente(paciente);
 	}
@@ -255,5 +259,8 @@ public class Dentalmanager {
 	public void deletarClinica(Clinica clinica) {
 		cadastroClinica.deletarClinica(clinica);
 	}
+	
+	
+	
 
 }
