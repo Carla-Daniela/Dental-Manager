@@ -20,13 +20,19 @@ public class Agendamento {
 	private String nomeMedico;
 	private String procedimento;
 	
+	
+	public Agendamento() {
+	}
+
 	public Agendamento(String nomePaciente, String horario, Date data, String nomeMedico, String procedimento) {
 
+		
 		this.nomePaciente = nomePaciente;
 		this.horario = horario;
 		this.data = data;
 		this.nomeMedico = nomeMedico;
 		this.procedimento = procedimento;
+		
 	}
 
 	public long getId() {
