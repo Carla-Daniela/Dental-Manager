@@ -10,15 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Agenda {
+public class Agenda{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String dia;
 	private String semana;
-	private String mes;
-	private String horario;
+	private String mes;  
+	private String horario; 
 	@OneToMany
 	private List<Agendamento> agendamentos;
 	

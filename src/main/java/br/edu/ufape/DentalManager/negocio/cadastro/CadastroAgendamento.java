@@ -25,7 +25,7 @@ public class CadastroAgendamento implements InterfaceCadastroAgendamento {
 	}
 
 	@Override
-	public List<Agendamento> listarAgendamet(){
+	public List<Agendamento> listarAgendamento(){
 		return colecaoagendamento.findAll();
 	}
 
@@ -36,12 +36,12 @@ public class CadastroAgendamento implements InterfaceCadastroAgendamento {
 	}
 
 	@Override
-	public void salvarAgenda(Agendamento agendamento) {
+	public void salvarAgendamento(Agendamento agendamento) {
 		colecaoagendamento.delete(agendamento);
 	}
 
 	@Override
-	public void deletarAgenda(Agendamento agendamento) {
+	public void deletarAgendamento(Agendamento agendamento) {
 		colecaoagendamento.save(agendamento);
 		
 	}
