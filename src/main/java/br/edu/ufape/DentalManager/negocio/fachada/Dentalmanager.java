@@ -185,8 +185,13 @@ public class Dentalmanager {
 		return cadastroDentista.listarDentista();
 	}
 
-	void deletarDentistaId(Long id) {
-		cadastroDentista.deletarDentistaId(id);
+	void deletarDentistaId(Long id) throws FuncionarioInexistenteException, DemitirException {
+		
+		Dentista dentista = new Dentista();
+		if (dentista.getId() == id);
+			if(cadastroFuncionario.ProcurarFuncionarioCPF(dentista.getCpf())!=null)
+				cadastroDentista.deletarDentistaId(id);
+		throw new DemitirException();
 	}
 
 	void salvarDentista(Dentista dentista) {
@@ -233,15 +238,12 @@ public class Dentalmanager {
 
 	public void deletarPacienteId(Long id) {
 		cadastroPaciente.deletarPaciente(id);
-		
-		
+			
 	}
 	public void salvarPaciente(Paciente entity) throws Exception {
 		
 			 cadastroPaciente.salvarPaciente(entity);
-
 	}
-	
 	
 	public void deletarPaciente(Paciente paciente) {
 		cadastroPaciente.deletarPaciente(paciente);

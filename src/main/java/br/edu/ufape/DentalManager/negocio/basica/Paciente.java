@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import br.edu.ufape.DentalManager.negocio.cadastro.CPFInvalidoException;
-import br.edu.ufape.DentalManager.negocio.cadastro.CPFValidator;
+
+import br.edu.ufape.DentalManager.negocio.basica.CPFValidator;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
