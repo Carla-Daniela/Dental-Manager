@@ -49,151 +49,149 @@ public class Dentalmanager {
 	@Autowired
 	private InterfaceCadastroClinica cadastroClinica;
 
-	List<Administrador> procurarAdministradorNome(String nome){
+	public List<Administrador> procurarAdministradorNome(String nome){
 		return cadastroAdministrador.procurarAdministradorNome(nome);
 				}
-	Administrador procuraAdministradorId(long id){
+	public Administrador procuraAdministradorId(long id){
 		return cadastroAdministrador.procuraAdministradorId(id);
 	}
 
-	List<Administrador> listarAdministrador(){
+	public List<Administrador> listarAdministrador(){
 		return cadastroAdministrador.listarAdministrador();
 	}
 
-	void deletarAdministradorId(long id) {
+	public void deletarAdministradorId(long id) {
 		 cadastroAdministrador.deletarAdministradorId(id);
 	}
 
-	void salvarAdministrador(Administrador administrador) {
+	public void salvarAdministrador(Administrador administrador) {
 		cadastroAdministrador.salvarAdministrador(administrador);
 	}
 
-	void deletarAdministrador(Administrador administrador) {
+	public void deletarAdministrador(Administrador administrador) {
 		 cadastroAdministrador.deletarAdministrador(administrador);
 	}
 	
-	List<Agenda> procurarAgendaSemana(String semana){
+	public List<Agenda> procurarAgendaSemana(String semana){
 		return cadastroAgenda.procurarAgendaSemana(semana);
 	}
-	Agenda procuraAgendaId(long id) {
+	public Agenda procuraAgendaId(long id) {
 		return cadastroAgenda.procuraAgendaId(id);
 	}
 
-	List<Agenda> listarAgenda(){
+	public List<Agenda> listarAgenda(){
 		return cadastroAgenda.listarAgenda();
 	}
 
-	void deletarAgendaId(long id) {
+	public void deletarAgendaId(long id) {
 		cadastroAgenda.deletarAgendaId(id);
 	}
 
-	void salvarAgenda(Agenda agenda) {
+	public void salvarAgenda(Agenda agenda) {
 		cadastroAgenda.deletarAgenda(agenda);
 	}
 
-	void deletarAgenda(Agenda agenda) {
+	public void deletarAgenda(Agenda agenda) {
 		cadastroAgenda.deletarAgenda(agenda);
 	}
 	
-	List<Agendamento> procurarAgendamentoPaciente(String nomePaciente){
+	public List<Agendamento> procurarAgendamentoPaciente(String nomePaciente){
 		return cadastroAgendamento.procurarAgendamentoPaciente(nomePaciente);
 	}
 	
-	Agendamento procuraAgendamentoId(long id) {
+	public Agendamento procuraAgendamentoId(long id) {
 		return cadastroAgendamento.procuraAgendamentoId(id);
 	}
 
-	List<Agendamento> listarAgendament(){
+	public List<Agendamento> listarAgendament(){
 		return cadastroAgendamento.listarAgendamento();
 	}
 
-	void deletarAgendamentoId(long id) {
+	public void deletarAgendamentoId(long id) {
 		cadastroAgendamento.deletarAgendamentoId(id);
 	}
 
-	void salvarAgenda(Agendamento agendamento) {
+	public void salvarAgenda(Agendamento agendamento) {
 		cadastroAgendamento.salvarAgendamento(agendamento);
 	}
 
-	void deletarAgenda(Agendamento agendamento) {
+	public void deletarAgenda(Agendamento agendamento) {
 		cadastroAgendamento.deletarAgendamento(agendamento);
 	}
 	
-	List<Funcionario> procurarFuncionarioNome(String nome) throws FuncionarioInexistenteException{
+	public List<Funcionario> procurarFuncionarioNome(String nome) throws FuncionarioInexistenteException{
 		return cadastroFuncionario.procurarFuncionarioNome(nome);
 	}
 
-	Funcionario procurarFuncionarioId(long id) {
+	public Funcionario procurarFuncionarioId(long id) {
 		return cadastroFuncionario.procurarFuncionarioId(id);
 	}
 
-	List<Funcionario> listarFuncionario(){
+	public List<Funcionario> listarFuncionario(){
 		return cadastroFuncionario.listarFuncionario();
 	}
 
-	void deletarFuncionarioId(Long id) {
+	public void deletarFuncionarioId(Long id) {
 		cadastroFuncionario.deletarFuncionarioId(id);
 	}
 
-	void salvarFuncionario(Funcionario funcionario) {
+	public void salvarFuncionario(Funcionario funcionario) {
 		cadastroFuncionario.salvarFuncionario(funcionario);
 	}
 
-	void deletarFuncionario(Funcionario funcionario) {
+	public void deletarFuncionario(Funcionario funcionario) {
 		cadastroFuncionario.deletarFuncionario(funcionario);
 	}
 	
-	List<Secretario> procurarSecretarioNome(String nome){
+	public List<Secretario> procurarSecretarioNome(String nome){
 		return cadastroSecretario.procurarSecretarioNome(nome);
 	}
 
-	Secretario procurarSecretarioId(long id) {
+	public Secretario procurarSecretarioId(long id) {
 		return cadastroSecretario.procurarSecretarioId(id);
 	}
 
-	List<Secretario> listarSecretario(){
+	public List<Secretario> listarSecretario(){
 		return cadastroSecretario.listarSecretario();
 	}
 
-	void deletarSecretarioId(Long id) {
+	public void deletarSecretarioId(Long id) {
 		cadastroSecretario.deletarSecretarioId(id);
 	}
 
-	void salvarSecretario(Secretario secretario) {
-		try {
+	public void salvarSecretario(Secretario secretario) throws FuncionarioInexistenteException {
+		
 			if(cadastroFuncionario.ProcurarFuncionarioCPF(secretario.getCpf())!=null)
 				cadastroSecretario.salvarSecretario(secretario);
-		} catch (FuncionarioInexistenteException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
-	void deletarSecretario(Secretario secretario) {
+	public void deletarSecretario(Secretario secretario) {
 		cadastroSecretario.deletarSecretario(secretario);
 	}
 	
 	
-	List<Dentista> procurarDentistaNome(String nome){
+	public List<Dentista> procurarDentistaNome(String nome){
 		return cadastroDentista.procurarDentistaNome(nome);
 	}
 
-	Dentista procurarDentistaId(long id) {
+	public Dentista procurarDentistaId(long id) {
 		return cadastroDentista.procurarDentistaId(id);
 	}
 
-	List<Dentista> listarDentista(){
+	public List<Dentista> listarDentista(){
 		return cadastroDentista.listarDentista();
 	}
 
-	void deletarDentistaId(Long id) {
+	public void deletarDentistaId(Long id) {
 		cadastroDentista.deletarDentistaId(id);
 	}
 
-	void salvarDentista(Dentista dentista) {
+	public void salvarDentista(Dentista dentista) {
 		cadastroDentista.salvarDentista(dentista);
 	}
 
-	void deletarDentista(Dentista dentista) {
+	public void deletarDentista(Dentista dentista) {
 		cadastroDentista.deletarDentista(dentista);
 	}
 
@@ -237,9 +235,7 @@ public class Dentalmanager {
 		
 	}
 	public void salvarPaciente(Paciente entity) throws Exception {
-		
 			 cadastroPaciente.salvarPaciente(entity);
-
 	}
 	
 	
