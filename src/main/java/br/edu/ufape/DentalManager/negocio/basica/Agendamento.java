@@ -55,12 +55,16 @@ public class Agendamento {
 		this.horario = horario;
 	}
 
-	public Date getData() {
+	public Date getData(){
+		
 		return data;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setData(Date data) throws DataAgendException {
+		if(data != null) {
+			this.data = data;
+		}
+		 throw new DataAgendException(); 
 	}
 
 	public String getNomeMedico() {

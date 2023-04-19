@@ -11,7 +11,7 @@ public interface InterfaceCadastroAgendamento {
 
 	List<Agendamento> listarAgendamento();
 
-	void deletarAgendamentoId(long id);
+	void deletarAgendamentoId(long id) throws AgendamentoException;
 
 	void salvarAgendamento(Agendamento agendamento);
 	

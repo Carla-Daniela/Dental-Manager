@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.DentalManager.dado.ColecaoAgenda;
 import br.edu.ufape.DentalManager.dado.ColecaoAgendamento;
 import br.edu.ufape.DentalManager.negocio.basica.Agendamento;
+import br.edu.ufape.DentalManager.negocio.basica.Funcionario;
 
 @Service
 public class CadastroAgendamento implements InterfaceCadastroAgendamento {
@@ -29,20 +30,26 @@ public class CadastroAgendamento implements InterfaceCadastroAgendamento {
 		return colecaoagendamento.findAll();
 	}
 
-	@Override
-	public void deletarAgendamentoId(long id) {
-		colecaoagendamento.deleteById(id);
-		
-	}
 
 	@Override
 	public void salvarAgendamento(Agendamento agendamento) {
-		colecaoagendamento.delete(agendamento);
+		colecaoagendamento.save(agendamento);
 	}
 
 	@Override
 	public void deletarAgendamento(Agendamento agendamento) {
-		colecaoagendamento.save(agendamento);
+		colecaoagendamento.delete(agendamento);
+	}
+	
+	@Override
+	public void deletarAgendamentoId(long id) throws AgendamentoException {
+		List<Agendamento>agendamentos= listarAgendamento();
+		for(Agendamento agendamento : agendamentos) {
+			if(agendamento.getId()== id){
+				deletarAgendamento(agendamento);
+			}
+		}
+		throw new AgendamentoException();
 		
 	}
 
