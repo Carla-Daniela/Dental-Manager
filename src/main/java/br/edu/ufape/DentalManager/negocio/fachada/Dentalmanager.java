@@ -104,7 +104,7 @@ public class Dentalmanager {
 	}
 
 	List<Agendamento> listarAgendament(){
-		return cadastroAgendamento.listarAgendamet();
+		return cadastroAgendamento.listarAgendamento();
 	}
 
 	void deletarAgendamentoId(long id) {
@@ -112,11 +112,11 @@ public class Dentalmanager {
 	}
 
 	void salvarAgenda(Agendamento agendamento) {
-		cadastroAgendamento.salvarAgenda(agendamento);
+		cadastroAgendamento.salvarAgendamento(agendamento);
 	}
 
 	void deletarAgenda(Agendamento agendamento) {
-		cadastroAgendamento.deletarAgenda(agendamento);
+		cadastroAgendamento.deletarAgendamento(agendamento);
 	}
 	
 	List<Funcionario> procurarFuncionarioNome(String nome) throws FuncionarioInexistenteException{
@@ -273,16 +273,25 @@ public class Dentalmanager {
 	}
 	//secretario
 	public void Agendar(Agendamento agendamento) {
-		cadastroAgendamento.salvarAgenda(agendamento);
+		cadastroAgendamento.salvarAgendamento(agendamento);
 	}
-	public void ConfirmarAgendamento(Agendamento agendamento) {
+	public void ConfirmarAgendamento(Agendamento agendamento) throws AgendamentoInvalidoException {
 		List<Agendamento>agendamentos=cadastroAgendamento.procurarAgendamentoPaciente(agendamento.getNomePaciente());
 		for(Agendamento a : agendamentos) {
 			if(a.getData()==agendamento.getData()) {
-				cadastroAgendamento.salvarAgenda(agendamento);
-			}
+				cadastroAgendamento.salvarAgendamento(agendamento);
+			}throw new AgendamentoInvalidoException();
 		}
 		
 	}
 	
+	public void ContratarFuncionario(Funcionario funcionario) {
+		cadastroFuncionario.salvarFuncionario(funcionario);
+	}
+	
+	public void DemitirFuncionario(Funcionario funcionario) throws FuncionarioInexistenteException {
+		if(!cadastroFuncionario.ProcurarFuncionarioCPF(funcionario.getCpf()).equals(null)){
+			cadastroFuncionario.deletarFuncionarioId(funcionario.getId());
+		}
+	}
 }

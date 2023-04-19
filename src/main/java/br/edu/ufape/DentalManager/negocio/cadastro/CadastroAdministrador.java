@@ -46,5 +46,5 @@ public class CadastroAdministrador implements InterfaceCadastroAdministrador {
 		colecaoadministrador.save(administrador);
 		
 	}
-
+	
 }

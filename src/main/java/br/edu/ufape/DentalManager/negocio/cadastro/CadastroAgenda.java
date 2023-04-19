@@ -1,5 +1,6 @@
 package br.edu.ufape.DentalManager.negocio.cadastro;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,21 @@ public class CadastroAgenda implements InterfaceCadastroAgenda{
 	public void deletarAgenda(Agenda agenda) {
 		colecaoagenda.save(agenda);
 		
+	}
+	
+	@Override
+	public List<Double> retornarHorario(String dia){
+		List <Agenda> retorno = listarAgenda();
+		List<Double> aux = new ArrayList<Double>();
+		double aux1;
+		for(Agenda agenda : retorno) {
+		
+			if(agenda.getDia()== dia) {
+				aux1 = agenda.getHorario();
+				aux.add(aux1);
+			}	
+		}
+		return aux;
 	}
 
 }

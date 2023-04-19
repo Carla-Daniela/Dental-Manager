@@ -45,13 +45,7 @@ public class Paciente {
 		this.alergia = alergia;
 		this.tipoSanguineo = tipoSanguineo;
 		this.deficiencia = deficiencia;
-		CPFValidator ValidarCPF = new CPFValidator(); 
-		try {
-			if (ValidarCPF.validateCPF(cpf) == true)
-				this.cpf = cpf;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.cpf = cpf;
 		this.endereco = endereco;
 		this.agendamentos = agendamentos;
 	}

@@ -9,13 +9,17 @@ public interface InterfaceCadastroAgendamento {
 	
 	Agendamento procuraAgendamentoId(long id);
 
-	List<Agendamento> listarAgendamet();
+	List<Agendamento> listarAgendamento();
 
 	void deletarAgendamentoId(long id);
 
-	void salvarAgenda(Agendamento agendamento);
+	void salvarAgendamento(Agendamento agendamento);
+	
+	void deletarAgendamento(Agendamento agendamento);
 
-	void deletarAgenda(Agendamento agendamento);
+	
+
+	
 
 	
 }
