@@ -283,4 +283,13 @@ public class Dentalmanager {
 		
 	}
 	
+	public void ContratarFuncionario(Funcionario funcionario) {
+		cadastroFuncionario.salvarFuncionario(funcionario);
+	}
+	
+	public void DemitirFuncionario(Funcionario funcionario) throws FuncionarioInexistenteException {
+		if(!cadastroFuncionario.ProcurarFuncionarioCPF(funcionario.getCpf()).equals(null)){
+			cadastroFuncionario.deletarFuncionarioId(funcionario.getId());
+		}
+	}
 }
