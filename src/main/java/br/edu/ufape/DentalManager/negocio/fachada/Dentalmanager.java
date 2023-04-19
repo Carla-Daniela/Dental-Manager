@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.DentalManager.negocio.basica.Administrador;
 import br.edu.ufape.DentalManager.negocio.basica.Agenda;
 import br.edu.ufape.DentalManager.negocio.basica.Agendamento;
+import br.edu.ufape.DentalManager.negocio.cadastro.AgendamentoException;
 import br.edu.ufape.DentalManager.negocio.cadastro.FuncionarioInexistenteException;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAdministrador;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAgenda;
@@ -107,7 +108,7 @@ public class Dentalmanager {
 		return cadastroAgendamento.listarAgendamento();
 	}
 
-	void deletarAgendamentoId(long id) {
+	void deletarAgendamentoId(long id) throws AgendamentoException {
 		cadastroAgendamento.deletarAgendamentoId(id);
 	}
 
@@ -259,8 +260,13 @@ public class Dentalmanager {
 	public void deletarClinicaId(Long id) {
 		cadastroClinica.deletarClinicaId(id);
 	}
-	public Clinica salvarClinica(Clinica entity) {
-		return cadastroClinica.salvarClinica(entity);
+	public Clinica salvarClinica(Clinica entity) throws ClinicaCnpjException{
+		Clinica clinica = new Clinica();
+	    if(clinica.getCnpj()!= null) {
+	    	cadastroClinica.salvarClinica(entity);
+	    }
+		throw new ClinicaCnpjException();
+		
 	}
 	public void deletarClinica(Clinica clinica) {
 		cadastroClinica.deletarClinica(clinica);
