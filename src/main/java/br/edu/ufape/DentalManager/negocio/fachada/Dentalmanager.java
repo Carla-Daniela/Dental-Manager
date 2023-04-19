@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.DentalManager.negocio.basica.Administrador;
 import br.edu.ufape.DentalManager.negocio.basica.Agenda;
 import br.edu.ufape.DentalManager.negocio.basica.Agendamento;
+import br.edu.ufape.DentalManager.negocio.cadastro.AgendamentoException;
 import br.edu.ufape.DentalManager.negocio.cadastro.FuncionarioInexistenteException;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAdministrador;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAgenda;
@@ -107,11 +108,11 @@ public class Dentalmanager {
 		return cadastroAgendamento.listarAgendamento();
 	}
 
-	public void deletarAgendamentoId(long id) {
+	public void deletarAgendamentoId(long id) throws AgendamentoException {
 		cadastroAgendamento.deletarAgendamentoId(id);
 	}
 
-	public void salvarAgenda(Agendamento agendamento) {
+	public void salvarAgendamento(Agendamento agendamento) {
 		cadastroAgendamento.salvarAgendamento(agendamento);
 	}
 
@@ -183,8 +184,14 @@ public class Dentalmanager {
 		return cadastroDentista.listarDentista();
 	}
 
-	public void deletarDentistaId(Long id) {
-		cadastroDentista.deletarDentistaId(id);
+
+	public void deletarDentistaId(Long id)throws FuncionarioInexistenteException, DemitirException {
+		Dentista dentista = new Dentista();
+		if (dentista.getId() == id);
+			if(cadastroFuncionario.ProcurarFuncionarioCPF(dentista.getCpf())!=null)
+				cadastroDentista.deletarDentistaId(id);
+		throw new DemitirException();
+
 	}
 
 	public void salvarDentista(Dentista dentista) {
@@ -231,13 +238,11 @@ public class Dentalmanager {
 
 	public void deletarPacienteId(Long id) {
 		cadastroPaciente.deletarPaciente(id);
-		
-		
+			
 	}
 	public void salvarPaciente(Paciente entity) throws Exception {
 			 cadastroPaciente.salvarPaciente(entity);
 	}
-	
 	
 	public void deletarPaciente(Paciente paciente) {
 		cadastroPaciente.deletarPaciente(paciente);
@@ -255,8 +260,13 @@ public class Dentalmanager {
 	public void deletarClinicaId(Long id) {
 		cadastroClinica.deletarClinicaId(id);
 	}
-	public Clinica salvarClinica(Clinica entity) {
-		return cadastroClinica.salvarClinica(entity);
+	public Clinica salvarClinica(Clinica entity) throws ClinicaCnpjException{
+		Clinica clinica = new Clinica();
+	    if(clinica.getCnpj()!= null) {
+	    	cadastroClinica.salvarClinica(entity);
+	    }
+		throw new ClinicaCnpjException();
+		
 	}
 	public void deletarClinica(Clinica clinica) {
 		cadastroClinica.deletarClinica(clinica);
@@ -272,8 +282,8 @@ public class Dentalmanager {
 	public void ConfirmarAgendamento(Agendamento agendamento) throws AgendamentoInvalidoException {
 		List<Agendamento>agendamentos=cadastroAgendamento.procurarAgendamentoPaciente(agendamento.getNomePaciente());
 		for(Agendamento a : agendamentos) {
-			if(a.getData()==agendamento.getData()) {
-				cadastroAgendamento.salvarAgendamento(agendamento);
+			if(a.getNomePaciente()==agendamento.getNomePaciente()) {
+				agendamento.setValida(true);
 			}throw new AgendamentoInvalidoException();
 		}
 		

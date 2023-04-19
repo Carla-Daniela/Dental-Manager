@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import br.edu.ufape.DentalManager.negocio.cadastro.CPFInvalidoException;
+import br.edu.ufape.DentalManager.negocio.basica.CPFInvalidoException;
 import com.github.javafaker.Faker;
 
 class PacienteTest {

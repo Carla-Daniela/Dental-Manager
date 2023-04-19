@@ -1,6 +1,7 @@
 package br.edu.ufape.DentalManager.negocio.cadastro;
 
 import java.util.List;
+import br.edu.ufape.DentalManager.negocio.basica.CPFValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

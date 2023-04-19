@@ -19,14 +19,22 @@ public class Agendamento {
 	private Date data;
 	private String nomeMedico;
 	private String procedimento;
+	private boolean valida;
 	
-	public Agendamento(String nomePaciente, String horario, Date data, String nomeMedico, String procedimento) {
+	
+	public Agendamento() {
+	}
 
+	public Agendamento(String nomePaciente, String horario, Date data, String nomeMedico, String procedimento, boolean valida) {
+
+		
 		this.nomePaciente = nomePaciente;
 		this.horario = horario;
 		this.data = data;
 		this.nomeMedico = nomeMedico;
 		this.procedimento = procedimento;
+		this.valida=valida;
+		
 	}
 
 	public long getId() {
@@ -49,12 +57,16 @@ public class Agendamento {
 		this.horario = horario;
 	}
 
-	public Date getData() {
+	public Date getData(){
+		
 		return data;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setData(Date data) throws DataAgendException {
+		if(data != null) {
+			this.data = data;
+		}
+		 throw new DataAgendException(); 
 	}
 
 	public String getNomeMedico() {
@@ -73,9 +85,19 @@ public class Agendamento {
 		this.procedimento = procedimento;
 	}
 	
+	
+	
+	public boolean isValida() {
+		return valida;
+	}
+
+	public void setValida(boolean valida) {
+		this.valida = valida;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, horario, id, nomeMedico, nomePaciente, procedimento);
+		return Objects.hash(data, horario, id, nomeMedico, nomePaciente, procedimento, valida);
 	}
 
 	@Override
@@ -89,7 +111,9 @@ public class Agendamento {
 		Agendamento other = (Agendamento) obj;
 		return Objects.equals(data, other.data) && Objects.equals(horario, other.horario) && id == other.id
 				&& Objects.equals(nomeMedico, other.nomeMedico) && Objects.equals(nomePaciente, other.nomePaciente)
-				&& Objects.equals(procedimento, other.procedimento);
+				&& Objects.equals(procedimento, other.procedimento) && valida == other.valida;
 	}
+
+	
 	
 }

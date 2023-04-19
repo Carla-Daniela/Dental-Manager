@@ -1,4 +1,6 @@
-package br.edu.ufape.DentalManager.negocio.cadastro;
+package br.edu.ufape.DentalManager.negocio.basica;
+
+import br.edu.ufape.DentalManager.negocio.basica.CPFInvalidoException;
 
 public class CPFValidator {
 
