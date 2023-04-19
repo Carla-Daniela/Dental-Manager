@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import br.edu.ufape.DentalManager.negocio.basica.Agendamento;
+import br.edu.ufape.DentalManager.negocio.basica.Clinica;
 import br.edu.ufape.DentalManager.negocio.basica.Endereco;
 import br.edu.ufape.DentalManager.negocio.basica.Funcionario;
 
@@ -42,5 +43,21 @@ class IntegracaoTest {
 		assertEquals(agendamento.getNomePaciente(),"Nick");
 		
 	}
+	@Test
+	void salvarClinica(){
+		Endereco e = new Endereco(0,"sao pedro",151,"magano","garanhuns","55290000","casa");
+		Clinica clinica = new Clinica(1,"clinica dente", e, null, null,null);
+		try {
+	        dt.salvarClinica(clinica);
+	       
+	    } catch (ClinicaCnpjException x) {
+	        assertEquals("Não pode salvar clinica sem CNPJ", x.getMessage());
+	    }
+		
+		
+		
+		
+	}
+	
 
 }
