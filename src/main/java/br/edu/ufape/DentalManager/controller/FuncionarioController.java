@@ -22,7 +22,7 @@ import br.edu.ufape.DentalManager.negocio.fachada.Dentalmanager;
 public class FuncionarioController {
 	
 	@Autowired
-	Dentalmanager gerenciador;
+	private Dentalmanager gerenciador;
 	
 	@PostMapping(value="/FuncionarioConsulta")
 	public ResponseEntity<String> ConsultarFuncionario(@RequestBody Funcionario f){

@@ -25,9 +25,9 @@ public class Agendamento {
 	public Agendamento() {
 	}
 
-	public Agendamento(String nomePaciente, String horario, Date data, String nomeMedico, String procedimento, boolean valida) {
+	public Agendamento(long id, String nomePaciente, String horario, Date data, String nomeMedico, String procedimento, boolean valida) {
 
-		
+		this.id=id;
 		this.nomePaciente = nomePaciente;
 		this.horario = horario;
 		this.data = data;
@@ -65,8 +65,9 @@ public class Agendamento {
 	public void setData(Date data) throws DataAgendException {
 		if(data != null) {
 			this.data = data;
-		}
+		}else {
 		 throw new DataAgendException(); 
+		}
 	}
 
 	public String getNomeMedico() {

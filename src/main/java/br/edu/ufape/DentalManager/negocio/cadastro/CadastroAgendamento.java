@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.DentalManager.dado.ColecaoAgenda;
 import br.edu.ufape.DentalManager.dado.ColecaoAgendamento;
 import br.edu.ufape.DentalManager.negocio.basica.Agendamento;
+import br.edu.ufape.DentalManager.negocio.basica.DataAgendException;
 import br.edu.ufape.DentalManager.negocio.basica.Funcionario;
 
 @Service
@@ -32,7 +33,7 @@ public class CadastroAgendamento implements InterfaceCadastroAgendamento {
 
 
 	@Override
-	public void salvarAgendamento(Agendamento agendamento) {
+	public void salvarAgendamento(Agendamento agendamento)throws DataAgendException {
 		colecaoagendamento.save(agendamento);
 	}
 

@@ -15,6 +15,7 @@ import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAdministrado
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAgenda;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroAgendamento;
 import br.edu.ufape.DentalManager.negocio.basica.Clinica;
+import br.edu.ufape.DentalManager.negocio.basica.DataAgendException;
 import br.edu.ufape.DentalManager.negocio.basica.Endereco;
 import br.edu.ufape.DentalManager.negocio.basica.Paciente;
 import br.edu.ufape.DentalManager.negocio.cadastro.InterfaceCadastroClinica;
@@ -87,7 +88,7 @@ public class Dentalmanager {
 	public void deletarAgendaId(long id) {
 		cadastroAgenda.deletarAgendaId(id);
 	}
-
+	
 	public void salvarAgenda(Agenda agenda) {
 		cadastroAgenda.deletarAgenda(agenda);
 	}
@@ -112,7 +113,7 @@ public class Dentalmanager {
 		cadastroAgendamento.deletarAgendamentoId(id);
 	}
 
-	public void salvarAgendamento(Agendamento agendamento) {
+	public void salvarAgendamento(Agendamento agendamento) throws DataAgendException {
 		cadastroAgendamento.salvarAgendamento(agendamento);
 	}
 
@@ -276,16 +277,18 @@ public class Dentalmanager {
 		cadastroAgenda.salvarAgenda(agenda);
 	}
 	//secretario
-	public void Agendar(Agendamento agendamento) {
+	public void Agendamento(Agendamento agendamento) throws DataAgendException {
 		cadastroAgendamento.salvarAgendamento(agendamento);
 	}
-	public void ConfirmarAgendamento(Agendamento agendamento) throws AgendamentoInvalidoException {
+	public boolean ConfirmarAgendamento(Agendamento agendamento) throws AgendamentoInvalidoException {
 		List<Agendamento>agendamentos=cadastroAgendamento.procurarAgendamentoPaciente(agendamento.getNomePaciente());
 		for(Agendamento a : agendamentos) {
-			if(a.getNomePaciente()==agendamento.getNomePaciente()) {
-				agendamento.setValida(true);
-			}throw new AgendamentoInvalidoException();
+			if(!a.getNomePaciente().equals(agendamento.getNomePaciente())) {
+				throw new AgendamentoInvalidoException();
+				}
 		}
+		return true;
+		
 		
 	}
 	
