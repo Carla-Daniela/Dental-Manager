@@ -143,8 +143,6 @@ public class Dentalmanager {
 		cadastroFuncionario.deletarFuncionario(funcionario);
 	}
 	
-	
-	
 	List<Secretario> procurarSecretarioNome(String nome){
 		return cadastroSecretario.procurarSecretarioNome(nome);
 	}
@@ -235,10 +233,16 @@ public class Dentalmanager {
 
 	public void deletarPacienteId(Long id) {
 		cadastroPaciente.deletarPaciente(id);
+		
+		
 	}
-	public Paciente salvarPaciente(Paciente entity) {
-		return cadastroPaciente.salvarPaciente(entity);
+	public void salvarPaciente(Paciente entity) throws Exception {
+		
+			 cadastroPaciente.salvarPaciente(entity);
+
 	}
+	
+	
 	public void deletarPaciente(Paciente paciente) {
 		cadastroPaciente.deletarPaciente(paciente);
 	}
@@ -269,14 +273,23 @@ public class Dentalmanager {
 	public void Agendar(Agendamento agendamento) {
 		cadastroAgendamento.salvarAgendamento(agendamento);
 	}
-	public void ConfirmarAgendamento(Agendamento agendamento) {
+	public void ConfirmarAgendamento(Agendamento agendamento) throws AgendamentoInvalidoException {
 		List<Agendamento>agendamentos=cadastroAgendamento.procurarAgendamentoPaciente(agendamento.getNomePaciente());
 		for(Agendamento a : agendamentos) {
 			if(a.getData()==agendamento.getData()) {
 				cadastroAgendamento.salvarAgendamento(agendamento);
-			}
+			}throw new AgendamentoInvalidoException();
 		}
 		
 	}
 	
+	public void ContratarFuncionario(Funcionario funcionario) {
+		cadastroFuncionario.salvarFuncionario(funcionario);
+	}
+	
+	public void DemitirFuncionario(Funcionario funcionario) throws FuncionarioInexistenteException {
+		if(!cadastroFuncionario.ProcurarFuncionarioCPF(funcionario.getCpf()).equals(null)){
+			cadastroFuncionario.deletarFuncionarioId(funcionario.getId());
+		}
+	}
 }

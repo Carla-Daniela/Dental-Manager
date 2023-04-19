@@ -17,6 +17,12 @@ public class CadastroPaciente implements InterfaceCadastroPaciente{
 
 	@Override
 	public List<Paciente> procurarPacienteNome(String nome) {
+		try {
+			NomeValidator excecaoNome = new NomeValidator();
+			excecaoNome.encontrarNome(colecaoPaciente.findAll(),nome);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return colecaoPaciente.findByNome(nome);
 	}
 
@@ -37,8 +43,18 @@ public class CadastroPaciente implements InterfaceCadastroPaciente{
 	}
 
 	@Override
-	public Paciente salvarPaciente(Paciente entity) {
-		return colecaoPaciente.save(entity);
+	public void salvarPaciente(Paciente entity) {
+		
+		CPFValidator ValidarCPF = new CPFValidator();
+		try {
+			if (ValidarCPF.validateCPF(entity.getCpf()) == true)
+			
+				colecaoPaciente.save(entity);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

@@ -29,8 +29,11 @@ public class Dentista extends Funcionario {
 		return CRO;
 	}
 
-	public void setCRO(int cRO) {
+	public void setCRO(int cRO) throws CROException {
+	if(cRO!=0)
 		CRO = cRO;
+	throw new CROException();	
+		
 	}
 	
 

@@ -14,7 +14,7 @@ public interface InterfaceCadastroPaciente {
 	
 	void deletarPaciente (long id);
 	
-	Paciente salvarPaciente (Paciente entity);
+	void salvarPaciente (Paciente entity) throws Exception;
 	
 	void deletarPaciente (Paciente paciente);
 }

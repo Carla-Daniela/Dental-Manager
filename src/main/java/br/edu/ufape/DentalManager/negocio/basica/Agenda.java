@@ -17,16 +17,15 @@ public class Agenda{
 	private long id;
 	private String dia;
 	private String semana;
-	private String mes;  
-	private String horario; 
+	private String mes;
+	private double horario;
 	@OneToMany
 	private List<Agendamento> agendamentos;
-	
 	
 	public Agenda () {
 		
 	}
-	public Agenda(long id, String dia, String semana, String mes, String horario, List<Agendamento> agendamentos) {
+	public Agenda(long id, String dia, String semana, String mes, double horario , List<Agendamento> agendamentos) {
 		super();
 		this.id = id;
 		this.dia = dia;
@@ -35,6 +34,7 @@ public class Agenda{
 		this.horario = horario;
 		this.agendamentos = agendamentos;
 	}
+	
 	public long getId() {
 		return id;
 	}
@@ -63,11 +63,11 @@ public class Agenda{
 		this.mes = mes;
 	}
 
-	public String getHorario() {
+	public double getHorario() {
 		return horario;
 	}
 
-	public void setHorario(String horario) {
+	public void setHorario(double horario) {
 		this.horario = horario;
 	}
 	public List<Agendamento> getAgendamentos() {

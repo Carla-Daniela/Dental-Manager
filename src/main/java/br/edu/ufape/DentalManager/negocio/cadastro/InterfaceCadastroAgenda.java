@@ -16,4 +16,6 @@ public interface InterfaceCadastroAgenda {
 	void salvarAgenda(Agenda agenda);
 
 	void deletarAgenda(Agenda agenda);
+
+	List<Double> retornarHorario(String dia);
 }

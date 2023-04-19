@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import br.edu.ufape.DentalManager.negocio.cadastro.CPFInvalidoException;
+import br.edu.ufape.DentalManager.negocio.cadastro.CPFValidator;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -73,7 +75,7 @@ public class Paciente {
 		this.nascimento = nascimento;
 	}
 
-	public boolean isSexo() {
+	public boolean getSexo() {
 		return sexo;
 	}
 
@@ -109,8 +111,15 @@ public class Paciente {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCpf(String cpf) throws CPFInvalidoException {
+		
+		CPFValidator ValidarCPF = new CPFValidator(); 
+			try {
+				if (ValidarCPF.validateCPF(cpf) == true)
+					this.cpf = cpf;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
 	
 
@@ -154,10 +163,11 @@ public class Paciente {
 				&& sexo == other.sexo && Objects.equals(tipoSanguineo, other.tipoSanguineo);
 	}
 
-	
-
-
-	
-
+	@Override
+	public String toString() {
+		return "Paciente [id=" + id + ", nome=" + nome + ", nascimento=" + nascimento + ", sexo=" + sexo + ", alergia="
+				+ alergia + ", tipoSanguineo=" + tipoSanguineo + ", deficiencia=" + deficiencia + ", cpf=" + cpf
+				+ ", endereco=" + endereco + ", agendamentos=" + agendamentos + "]";
+	}
 	
 }
